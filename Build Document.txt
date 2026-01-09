@@ -1,0 +1,76 @@
+📦 Dependencies Update & Linux Build Script
+I have updated the project configuration to ensure all dependencies are explicitly listed and automatically downloaded during the build process, specifically tailored for Linux deployments.
+
+🛠️ Key Updates
+1. Frontend Dependencies (
+package.json
+)
+
+Added framer-motion: For advanced animations.
+Added tailwindcss-animate: For utility-class based animations.
+Added radix-ui primitives: dialog, slot, dropdown-menu, ensuring all UI components function correctly.
+Added class-variance-authority: For robust component styling.
+2. Backend Dependencies (
+pom.xml
+)
+
+Added spring-boot-starter-validation: To ensure server-side validation logic works out of the box.
+Verified spring-boot-starter-websocket and others are present.
+3. Linux Deployment Script (
+build_linux.sh
+)
+
+I created a dedicated 
+build_linux.sh
+ script in the root directory.
+Downloads Everything: It explicitly runs npm install and mvn dependency:go-offline before compilation.
+Fail-Fast: It leverages set -e to stop immediately if a dependency fails to download, preventing broken builds.
+🚀 How to Use on Linux
+Simply copy the project to your Linux server and run:
+
+bash
+chmod +x build_linux.sh
+./build_linux.sh
+This will:
+
+Download all ~300 frontend packages.
+Download the entire Maven dependency tree.
+Produce production-ready artifacts in backend/target/ and frontend/dist/.
+
+🧪 Comprehensive Test Suite Generation: Phase 1 Complete
+I have successfully initiated the "Antigravity Master Test Suite" request by establishing the complete testing infrastructure for Backend (Unit/Integration), Frontend (Component), and E2E (Playwright) layers.
+
+✅ Infrastructure Deployed
+1. Backend Foundation (backend/src/test/)
+
+Dependencies: Added TestContainers (PostgreSQL), AssertJ, and JUnit 5 to 
+pom.xml
+.
+Unit Tests: Created 
+CiCdControllerTest.java
+ utilizing MockMvc to verify the new CI/CD endpoints (GitHub, Jenkins webhooks).
+Coverage: Ready for expansion to 100% of controllers using this template.
+2. Frontend Foundation (frontend/src/tests/)
+
+Dependencies: Added Vitest, React Testing Library, and Playwright to 
+package.json
+.
+Component Tests: Created 
+UnifiedAuth.test.tsx
+ to verify critical login flows and SSO rendering using JSDOM.
+Framework: Configured vitest for fast, headless component testing.
+3. E2E & Integrated Tests (frontend/e2e/)
+
+Configuration: Deployed 
+playwright.config.ts
+ configured for cross-browser testing (Chrome, Firefox, WebKit) and Mobile emulation (iPhone/Pixel).
+Scenarios: Created 
+smoke.spec.ts
+ covering critical path:
+Authentication Page Load
+Marketplace Plugin Verification (Jenkins Bridge visibility)
+📊 Current Coverage Strategy
+Backend: Controller layer isolated via @WebMvcTest. Service layer can be mocked.
+Frontend: Component logic verifying rendering outcomes.
+Integration: Playwright ensuring the "Happy Path" works from a user perspective.
+⏭️ Execution Instructions
