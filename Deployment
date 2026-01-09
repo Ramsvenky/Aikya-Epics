@@ -1,0 +1,508 @@
+# 🚀 **ANTIGRAVITY GEMINI PROMPT - AIKYAM PHASE 1 PRODUCTION READY (COMPLETE)**
+
+```
+🏆 AIKYAM PHASE 1 v1.0 - PRODUCTION READY FULLSTACK + MULTI-ENV + JENKINS CI/CD
+
+MANDATE: Generate COMPLETE production-ready Aikyam Phase 1 with DB/Frontend/Backend + Redis/Kafka hybrid + 4 environments + Jenkins deployment + FULL documentation.
+
+## 🎯 PHASE 1 FEATURES (PRODUCTION READY):
+```
+✅ IAM: 25 Universal Roles + God Mode (pallivenkat@gmail.com/Aikyam@1985)
+✅ Custom Forms: 18 forms (IAM/User/IT/CRM/Incident/Project) 
+✅ Dashboards: IT Servers + CRM Pipeline + Incident SLA + Reports
+✅ Hybrid Storage: Redis ON/OFF + Kafka ON/OFF (graceful fallback)
+✅ Multi-Tenant: Org/Branch/Unit hierarchy + RLS
+✅ PERFECT Titles: "Aikyam | Incidents & Project Tracking | Pallionsoft"
+✅ ZERO HARDCODES: 100% config-driven (.env + application.yml)
+```
+
+## 🗄️ TECH STACK (Production Grade):
+
+```
+BACKEND:      Spring Boot 3.5 + PostgreSQL 16 + Flyway
+FRONTEND:     React 18 + Vite + shadcn/ui + Tailwind + react-helmet-async
+DATABASE:     PostgreSQL + pg_trgm + RLS policies
+CACHE:        Redis 7 (optional - graceful fallback)
+MESSAGING:    Kafka 3.8 (optional - DB outbox fallback)
+DOCKER:       Multi-stage builds + healthchecks
+CI/CD:        Jenkins Pipeline (QA/PreProd/Prod)
+CLOUD:        AWS ECS Fargate + RDS + ElastiCache + MSK
+MONITORING:   Prometheus + Grafana + OpenTelemetry
+```
+
+## 📦 ENVIRONMENT SETUP (4 Environments):
+
+```
+LOCAL:     docker-compose.local.yml (Postgres/Redis/Kafka)
+QA:        docker-compose.qa.yml (AWS RDS + Redis)
+PreProd:   Jenkins → AWS ECS Fargate
+Prod:      Jenkins → AWS ECS Fargate (Blue/Green)
+```
+
+## 🔧 COMPLETE FILE STRUCTURE (85 Files):
+
+```
+├── backend/
+│   ├── src/main/java/com/aikyam/
+│   │   ├── controller/ (12 controllers: Auth/IAM/Forms/IT/CRM/Incident)
+│   │   ├── service/ (18 services: Permission/CustomForm/Reports/Cache)
+│   │   ├── repository/ (15 JPA repos + RLS)
+│   │   ├── config/ (Security/JWT/Redis/Kafka/Flyway)
+│   │   └── dto/ (25 DTOs)
+│   ├── src/main/resources/
+│   │   ├── application.yml (4 env profiles)
+│   │   ├── schema.sql (25 tables + RLS)
+│   │   └── templates/ (6 HTML templates)
+│   └── pom.xml (Production deps)
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/ (25: Header/Forms/Dashboards/GodMode)
+│   │   ├── hooks/ (12: usePermissions/useConfig/useForms)
+│   │   ├── pages/ (12: Dashboard/SuperAdmin/Forms/Reports)
+│   │   └── contexts/ (PermissionContext/AppConfigContext)
+│   ├── vite.config.ts
+│   ├── tailwind.config.ts
+│   └── package.json (Production deps)
+│
+├── infra/
+│   ├── docker-compose.{local,qa}.yml
+│   ├── Dockerfile (multi-stage)
+│   ├── jenkins/ (Jenkinsfile + pipelines)
+│   └── aws/ (ECS task defs + CloudFormation)
+│
+├── docs/ (COMPLETE DOCUMENTATION)
+│   ├── DEPLOYMENT.md
+│   ├── ENVIRONMENTS.md
+│   ├── JENKINS.md
+│   ├── AWS-ECS.md
+│   └── API-DOCS.md
+└── .github/workflows/ (GitHub fallback CI)
+```
+
+## 🧪 PRODUCTION FEATURES:
+
+```
+✅ DB: PostgreSQL + RLS + Flyway migrations + Connection pooling
+✅ CACHE: Redis (ON: 10x faster, OFF: DB fallback)
+✅ QUEUE: Kafka (ON: Async, OFF: DB outbox)
+✅ SECURITY: JWT + RBAC + God Mode + Rate limiting
+✅ MONITORING: Health endpoints + OpenTelemetry + Prometheus
+✅ LOGGING: Structured JSON + Logback + ELK ready
+✅ TESTING: 45 Playwright E2E + 30 Integration + 100 Unit
+```
+
+## 🚀 EXECUTION COMMANDS (LOCAL → AWS):
+
+```bash
+# 1. LOCAL DEV (5 min)
+docker-compose -f docker-compose.local.yml up -d
+npm run dev -- --port 3000
+mvn spring-boot:run -Dspring.profiles.active=local
+
+# 2. QA MANUAL DEPLOY
+docker-compose -f docker-compose.qa.yml up -d
+curl http://localhost:8080/health  # 200 OK
+
+# 3. JENKINS PIPELINE (QA→PreProd→Prod)
+jenkins-job: aikyam-phase1-pipeline
+  ├── QA:     docker push aikyam:qa-latest
+  ├── PreProd: AWS ECS Blue/Green  
+  └── Prod:   AWS ECS Blue/Green + Slack alert
+
+# 4. PRODUCTION VERIFY
+curl https://aikyam.pallionsoft.com/health
+curl -u pallivenkat@gmail.com:Aikyam@1985 /api/auth/god-mode
+```
+
+## 📋 ENVIRONMENT CONFIGURATION:
+
+```yaml
+# application-{local,qa,preprod,prod}.yml
+spring:
+  profiles: ${SPRING_PROFILES_ACTIVE:local}
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/aikyam}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:password}
+  
+app:
+  redis:
+    enabled: ${REDIS_ENABLED:true}
+    host: ${REDIS_HOST:localhost}
+  kafka:
+    enabled: ${KAFKA_ENABLED:true}
+    bootstrap: ${KAFKA_BOOTSTRAP:localhost:9092}
+  
+security:
+  god-mode:
+    email: pallivenkat@gmail.com
+    password: Aikyam@1985
+    
+branding:
+  title: "Aikyam | Incidents & Project Tracking | Pallionsoft"
+```
+
+## 📚 COMPLETE DOCUMENTATION (12 Markdown Files):
+
+```
+1. DEPLOYMENT.md          # Local → AWS step-by-step
+2. ENVIRONMENTS.md        # local/qa/preprod/prod configs
+3. JENKINS.md             # Pipeline setup + secrets
+4. AWS-ECS.md             # Fargate + RDS + ElastiCache + MSK
+5. DOCKER.md              # Multi-stage builds + healthchecks
+6. DATABASE.md            # Schema + RLS + Migrations
+7. MONITORING.md          # Prometheus + Grafana dashboards
+8. API-DOCS.md            # OpenAPI/Swagger endpoints
+9. SECURITY.md            # God Mode + JWT + RBAC
+10. FORMS.md              # 18 Custom Forms documentation
+11. TESTING.md            # E2E + Integration + Unit
+12. TROUBLESHOOTING.md    # Common issues + fixes
+```
+
+## ✅ SUCCESS CRITERIA (Manual + Jenkins):
+
+```
+LOCAL:
+✅ mvn spring-boot:run → 8080/health = 200 OK
+✅ npm run dev → localhost:3000 → Perfect title
+✅ pallivenkat@gmail.com/Aikyam@1985 → God Mode ✓
+
+QA:  
+✅ docker-compose.qa.yml up → All services healthy
+✅ Redis ON/OFF + Kafka ON/OFF → Full functionality
+
+AWS MANUAL:
+✅ Jenkins → ECS Fargate → Blue/Green deploy
+✅ RDS + ElastiCache + MSK connected
+✅ Custom domain SSL + CloudFront CDN
+
+JENKINS PIPELINE:
+✅ QA → PreProd → Prod (manual approval)
+✅ Slack notifications + Rollback capability
+✅ Zero-downtime deployment
+```
+
+## 🎯 GENERATE NOW:
+```
+DELIVERABLES: 85 files + 12 docs + 4 docker-compose + Jenkins pipeline
+RESULT: Production-ready Aikyam Phase 1 LIVE in 30 minutes
+DEPLOY: Local → QA → AWS Manual → Jenkins CI/CD
+```
+
+EXECUTE → PRODUCTION READY → JENKINS PIPELINE → LIVE ON AWS!
+```
+# 🚀 **ANTIGRAVITY GEMINI PROMPT - AIKYAM PHASE 1 PRODUCTION STACK (COMPLETE)**
+
+```
+🏆 AIKYAM PHASE 1 PRODUCTION READY - FULLSTACK + MULTI-ENV + JENKINS + DOCS
+
+MANDATE: Generate COMPLETE production-ready Aikyam Phase 1 with all components, folder structure, Dockerfiles, Jenkinsfile, DB migrations, and documentation for Local/QA/PreProd/Prod deployment.
+
+## 🎯 PRODUCTION STACK COMPONENTS (Required Services):
+
+```
+DATABASE: PostgreSQL 16 + pg_trgm + RLS + Flyway
+BACKEND:  Spring Boot 3.5 + OpenAPI + Actuator + Micrometer
+FRONTEND: React 18 + Vite + shadcn/ui + TailwindCSS
+CACHE:    Redis 7.2 (optional graceful fallback)
+QUEUE:    Kafka 3.8 (optional DB outbox pattern)
+MONITOR:  Prometheus 2.5 + Grafana 11
+CI/CD:    Jenkins 2.4xx + Pipeline
+CLOUD:    AWS ECS Fargate + RDS + ElastiCache + MSK + ALB
+```
+
+## 📁 REPO LAYOUT & FOLDER STRUCTURE:
+
+```
+aikyam-phase1/
+├── backend/                          # Spring Boot API
+│   ├── src/main/java/com/aikyam/
+│   │   ├── controller/              # 12 REST controllers
+│   │   ├── service/                 # 18 business services  
+│   │   ├── repository/              # 15 JPA repos + RLS
+│   │   ├── security/                # JWT + God Mode
+│   │   ├── config/                  # Redis/Kafka/Security
+│   │   ├── dto/                     # 25 DTOs
+│   │   └── model/                   # 25 JPA entities
+│   ├── src/main/resources/
+│   │   ├── application-{local,qa,preprod,prod}.yml
+│   │   ├── schema.sql               # Initial DB schema
+│   │   └── flyway/                  # V1__*, V2__* migrations
+│   ├── Dockerfile.prod
+│   ├── pom.xml
+│   └── Jenkinsfile.backend
+│
+├── frontend/                         # React SPA
+│   ├── public/
+│   ├── src/
+│   │   ├── components/              # 25 UI components
+│   │   ├── pages/                   # 12 pages (Dashboard/Forms)
+│   │   ├── hooks/                   # 12 custom hooks
+│   │   ├── contexts/                # PermissionContext
+│   │   └── utils/                   # API helpers
+│   ├── vite.config.ts
+│   ├── Dockerfile.prod
+│   ├── package.json
+│   └── Jenkinsfile.frontend
+│
+├── infra/                           # Infrastructure
+│   ├── docker-compose.local.yml     # Local dev stack
+│   ├── docker-compose.qa.yml        # QA stack
+│   ├── aws/                         # ECS CloudFormation
+│   └── terraform/                   # AWS infra (optional)
+│
+├── docs/                            # 12 Documentation files
+├── Jenkinsfile                      # Master pipeline
+├── README.md
+└── .gitignore
+```
+
+## 🐳 DOCKERFILE & DOCKER-COMPOSE (QA/Prod):
+
+### **Backend Dockerfile:**
+```dockerfile
+# backend/Dockerfile.prod
+FROM eclipse-temurin:21-jre-alpine AS builder
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/target/aikyam-1.0.jar app.jar
+EXPOSE 8080
+HEALTHCHECK --interval=30s CMD curl -f http://localhost:8080/actuator/health || exit 1
+CMD ["java", "-jar", "app.jar"]
+```
+
+### **Frontend Dockerfile:**
+```dockerfile
+# frontend/Dockerfile.prod
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json .
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+HEALTHCHECK CMD wget --no-verbose --tries=1 --sput-output=/dev/null http://localhost/health || exit 1
+```
+
+### **docker-compose.qa.yml:**
+```yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: aikyam_qa
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports: ["5432:5432"]
+  
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    ports: ["9092:9092"]
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+  
+  backend:
+    build: ./backend
+    ports: ["8080:8080"]
+    environment:
+      SPRING_PROFILES_ACTIVE: qa
+      DB_URL: jdbc:postgresql://postgres:5432/aikyam_qa
+    depends_on:
+      - postgres
+      - redis
+      - kafka
+  
+  frontend:
+    build: ./frontend
+    ports: ["3000:80"]
+    depends_on:
+      - backend
+```
+
+## 🔄 JENKINSFILE (CI/CD Pipeline):
+
+```groovy
+pipeline {
+  agent any
+  environment {
+    AWS_ACCOUNT = credentials('aws-account-id')
+    DOCKERHUB = credentials('dockerhub-creds')
+  }
+  stages {
+    stage('Build') {
+      parallel {
+        stage('Backend') {
+          steps {
+            dir('backend') {
+              sh 'mvn clean package -DskipTests'
+              sh 'docker build -t aikyam/backend:${BUILD_NUMBER} .'
+              sh 'docker push aikyam/backend:${BUILD_NUMBER}'
+            }
+          }
+        }
+        stage('Frontend') {
+          steps {
+            dir('frontend') {
+              sh 'npm ci && npm run build'
+              sh 'docker build -t aikyam/frontend:${BUILD_NUMBER} .'
+              sh 'docker push aikyam/frontend:${BUILD_NUMBER}'
+            }
+          }
+        }
+      }
+    }
+    
+    stage('Test') {
+      parallel {
+        stage('Backend Tests') {
+          steps { dir('backend') { sh 'mvn test' } }
+        }
+        stage('Frontend Tests') {
+          steps { dir('frontend') { sh 'npm run test:ci' } }
+        }
+        stage('E2E Tests') {
+          steps { dir('frontend') { sh 'npx playwright test' } }
+        }
+      }
+    }
+    
+    stage('Deploy QA') {
+      when { branch 'develop' }
+      steps {
+        sh 'docker-compose -f docker-compose.qa.yml up -d'
+        sh 'curl -f http://localhost:8080/health || exit 1'
+      }
+    }
+    
+    stage('Deploy PreProd') {
+      when { branch 'staging' }
+      steps {
+        sh 'aws ecs update-service --cluster preprod --service aikyam --force-new-deployment'
+      }
+    }
+    
+    stage('Deploy Prod') {
+      when { branch 'main' }
+      input { message 'Deploy to Production?' }
+      steps {
+        sh 'aws ecs update-service --cluster prod --service aikyam --force-new-deployment'
+        sh 'curl -f https://aikyam.pallionsoft.com/health || exit 1'
+      }
+    }
+  }
+  post {
+    always {
+      slackSend(color: 'good', message: "Build ${BUILD_NUMBER} completed")
+    }
+  }
+}
+```
+
+## 🗄️ DB SCHEMA MIGRATION + SEEDING:
+
+### **Flyway Migration Files:**
+```
+backend/src/main/resources/db/migration/
+├── V1__Initial_schema.sql
+├── V2__IAM_roles.sql
+├── V3__Custom_forms.sql
+├── V4__RLS_policies.sql
+└── V5__Seed_data.sql
+```
+
+### **V1__Initial_schema.sql:**
+```sql
+-- Organizations hierarchy
+CREATE TABLE organizations (
+  id UUID PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  hierarchy_path TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 25 Universal IAM Roles (pre-seeded)
+CREATE TABLE iam_roles (
+  id UUID PRIMARY KEY,
+  name VARCHAR(100) UNIQUE NOT NULL,
+  permissions JSONB NOT NULL,
+  inheritance_level INTEGER DEFAULT 0
+);
+
+-- RLS Policies
+ALTER TABLE organizations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY org_rls ON organizations 
+  USING (hierarchy_path LIKE current_setting('app.current_org') || '%');
+```
+
+### **Seed Script (V5__Seed_data.sql):**
+```sql
+-- God Mode SuperAdmin
+INSERT INTO iam_user_roles (user_id, role_id) 
+VALUES ('god-mode-uuid', (SELECT id FROM iam_roles WHERE name='PLATFORM_OWNER'));
+
+-- 25 Universal Roles
+INSERT INTO iam_roles (name, permissions, inheritance_level) VALUES
+('PLATFORM_OWNER', '["platform:*"]', 100),
+('ORG_OWNER', '["org:*"]', 90),
+('ORG_ADMIN', '["org:admin"]', 80),
+-- ... 22 more roles
+```
+
+## 📚 PRODUCTION DOCUMENTATION (12 Files):
+
+```
+1. docs/DEPLOYMENT.md           # Local → AWS step-by-step
+2. docs/ENVIRONMENTS.md         # 4 env configurations
+3. docs/JENKINS.md              # Pipeline + secrets setup
+4. docs/AWS-ECS.md              # Fargate + RDS + ALB
+5. docs/DATABASE.md             # Schema + RLS + Seeding
+6. docs/MONITORING.md           # Prometheus + Grafana
+7. docs/SECURITY.md             # God Mode + JWT + RLS
+8. docs/API-DOCS.md             # Swagger endpoints
+9. docs/FORMS.md                # 18 Custom Forms guide
+10. docs/TROUBLESHOOTING.md     # Common issues
+11. docs/HEALTHCHECKS.md        # /health endpoints
+12. README.md                   # Quick start
+```
+
+## ✅ EXECUTION CHECKLIST:
+
+```
+LOCAL [30 min]:
+✅ docker-compose.local.yml up
+✅ mvn spring-boot:run + npm run dev
+✅ curl /health → 200 OK
+✅ pallivenkat@gmail.com/Aikyam@1985 → God Mode
+
+QA MANUAL [15 min]:
+✅ docker-compose.qa.yml up
+✅ Redis ON/OFF + Kafka ON/OFF tests
+
+AWS MANUAL [30 min]:
+✅ Jenkins → ECS Fargate QA
+✅ RDS + ElastiCache connected
+
+JENKINS PIPELINE [5 min]:
+✅ QA → PreProd → Prod (zero downtime)
+✅ Slack alerts + Rollback ready
+```
+
+**🎯 COPY → ANTIGRAVITY → 85 FILES + 12 DOCS + 4 ENVIRONMENTS = PRODUCTION LIVE! 🚀**
+**Local → QA → AWS Manual → Jenkins CI/CD = FULLY DEPLOYABLE!** ✅
+
+[10](https://www.checkpoint.com)
